@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "gypsum":            {"label": "Gypsum",            "type": "raw_material"},
+    "gypsum_mold":       {"label": "Gypsum Mold",       "type": "tool"},
+    "plaster_model":     {"label": "Plaster Model",     "type": "tool"},
+    "master_mold":       {"label": "Master Mold",       "type": "tool"},
+    "slip_casting":      {"label": "Slip Casting",      "type": "process"},
+    "ceramic_body":      {"label": "Ceramic Body",      "type": "intermediate"},
+    "ceramic_cup":       {"label": "Ceramic Cup",       "type": "product"},
+    "firing":            {"label": "Kiln Firing",       "type": "process"},
+    "glaze":             {"label": "Glaze",             "type": "material"}
+  },
+  "edges": [
+    {"source": "gypsum",        "target": "gypsum_mold",   "relation": "is_made_into", "weight": 1.0},
+    {"source": "gypsum_mold",   "target": "slip_casting",  "relation": "is_used_in",   "weight": 1.0},
+    {"source": "slip_casting",  "target": "ceramic_body",  "relation": "produces",     "weight": 1.0},
+    {"source": "gypsum",        "target": "plaster_model", "relation": "is_made_into", "weight": 1.2},
+    {"source": "plaster_model", "target": "master_mold",   "relation": "is_used_to_make", "weight": 1.2},
+    {"source": "master_mold",   "target": "slip_casting",  "relation": "is_used_in",   "weight": 1.2},
+    {"source": "ceramic_body",  "target": "firing",        "relation": "is_processed_by", "weight": 1.0},
+    {"source": "firing",        "target": "ceramic_cup",   "relation": "produces",     "weight": 1.0},
+    {"source": "glaze",         "target": "ceramic_cup",   "relation": "is_applied_to","weight": 1.0},
+    {"source": "ceramic_body",  "target": "ceramic_cup",   "relation": "becomes",      "weight": 1.0}
+  ]
+}
